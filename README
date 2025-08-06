@@ -1,0 +1,155 @@
+sequenceDiagram
+    participant C as Client
+    participant SC as SecurityConfig
+    participant UC as UserController
+    participant US as UserService
+    participant UR as UserRepository
+    participant AC as AuthController
+    participant AS as AuthService
+    participant AM as AuthenticationManager
+    participant CDS as CustomUserDetailsService
+    participant JP as JwtTokenProvider
+    participant JF as JwtAuthenticationFilter
+
+    %% User Registration
+    C->>+UC: POST /api/v1/users
+    UC->>+US: createUser(userRequest)
+    US->>+UR: existsByUsername/Email()
+    UR-->>-US: false
+    US->>US: Hash password
+    US->>+UR: save(user)
+    UR-->>-US: Saved user
+    US-->>-UC: UserResponse
+    UC-->>-C: 201 Created
+
+    %% User Login
+    C->>+AC: POST /api/v1/auth/login
+    AC->>+AS: authenticateUser(loginRequest)
+    AS->>+AM: authenticate()
+    AM->>+CDS: loadUserByUsername()
+    CDS->>+UR: findByUsername()
+    UR-->>-CDS: User
+    CDS-->>-AM: UserDetails
+    AM-->>-AS: Authentication
+    AS->>+JP: generateToken()
+    JP-->>-AS: JWT
+    AS-->>-AC: JwtAuthenticationResponse
+    AC-->>-C: 200 OK + JWT
+
+    %% Authenticated Request
+    C->>+JF: Request with JWT
+    JF->>+JP: validateToken()
+    JP-->>-JF: Claims
+    JF->>+JF: Set Authentication
+    JF->>Controller: Forward request
+    Controller-->>-C: 200 OK + Data
+
+    %% Legend
+    Note right of C: Client makes HTTP requests
+    Note right of SC: Security configuration
+    Note right of UC: Handles user registration
+    Note right of AC: Handles authentication
+    Note right of JP: JWT operations
+    Note right of JF: Validates JWT in requests
+
+
+    Cloud AWS Docker - Secure File Management System
+    Project Overview
+    A robust, secure, and scalable file management system built with Spring Boot, featuring JWT authentication, role-based access control, and Docker containerization. This application provides a comprehensive API for secure file uploads, downloads, and management.
+
+    Key Features
+    1. Authentication & Authorization
+    JWT-based authentication
+    Role-based access control (RBAC)
+    Secure password hashing with BCrypt
+    Token-based session management
+    2. File Management
+    Secure file upload with metadata storage
+    File download with proper content type handling
+    Soft delete functionality
+    File metadata tracking (upload date, size, type, etc.)
+    Support for various file types
+    3. Technical Stack
+    Backend: Spring Boot 3.x
+    Database: MySQL 8.0
+    Security: Spring Security with JWT
+    Containerization: Docker & Docker Compose
+    Build Tool: Maven
+    API Documentation: SpringDoc OpenAPI
+    4. Architecture
+    Layered architecture (Controller → Service → Repository)
+    Clean separation of concerns
+    DTO pattern for API responses
+    Exception handling with custom error responses
+    Environment-specific configurations
+    5. Security Features
+    File type validation
+    Secure file storage with unique filenames
+    CSRF protection
+    CORS configuration
+    Secure headers
+    Input validation
+    6. Deployment
+    Docker containerization
+    Multi-stage Docker builds
+    Environment variable configuration
+    Health checks
+    Logging and monitoring
+    Project Structure
+    cloudAwsDocker/
+    ├── src/main/java/com/cloudAwsDocker/
+    │   ├── config/           # Configuration classes
+    │   ├── controller/       # REST controllers
+    │   ├── dto/              # Data Transfer Objects
+    │   ├── entity/           # JPA entities
+    │   ├── enums/            # Enumerations
+    │   ├── exception/        # Custom exceptions
+    │   ├── repository/       # Data access layer
+    │   ├── security/         # Security configurations
+    │   ├── service/          # Business logic
+    │   │   └── impl/         # Service implementations
+    │   └── util/             # Utility classes
+    ├── src/main/resources/   # Configuration files
+    │   ├── application.yml   # Main configuration
+    │   └── db/               # Database migrations
+    └── Dockerfile            # Docker configuration
+    Getting Started
+    Prerequisites
+    Java 17+
+    Maven 3.6+
+    Docker 20.10+
+    MySQL 8.0+
+    Running with Docker
+    bash
+    # Build and start containers
+    docker-compose up --build
+
+    # Stop containers
+    docker-compose down
+    API Documentation
+    Once running, access the API documentation at:
+
+    Swagger UI: http://localhost:8082/swagger-ui.html
+    OpenAPI JSON: http://localhost:8082/v3/api-docs
+    Use Cases
+    Content Management Systems: Handle file uploads for web applications
+    Document Management: Securely store and retrieve documents
+    Media Storage: Manage images, videos, and other media files
+    Backup Solutions: Store and retrieve backup files
+    Future Enhancements
+    File versioning
+    Chunked uploads for large files
+    Integration with cloud storage (S3, Google Cloud Storage)
+    File preview generation
+    Advanced search and filtering
+    Virus scanning integration
+    File sharing with expiration
+    This project serves as a solid foundation for any application requiring secure file management capabilities with modern authentication and containerization.
+
+    Feedback submitted
+    Close
+    21 hours ago
+    9 hours ago
+    2 hours ago
+    11 minutes ago
+    2 minutes ago
