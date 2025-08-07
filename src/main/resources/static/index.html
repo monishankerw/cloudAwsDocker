@@ -5,289 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> E-commerce - Your One-Stop Shop</title>
     <meta name="description" content="Discover amazing products at E-commerce. Shop now for the best deals on electronics, fashion, home & garden, and more!">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32.png/0d6efd/ffffff?text=DE">
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome 6 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link href="/css/styles.css" rel="stylesheet">
-    
+
     <!-- Preload important images -->
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80">
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80">
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar bg-dark text-white py-2">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-phone-alt me-2"></i>
-                        <span class="me-3">+91 7234567890</span>
-                        <i class="fas fa-envelope me-2"></i>
-                        <span>monishnker@gmail.com</span>
-                    </div>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="social-links">
-                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="/">
-                <span class="text-primary">E-Commerce</span><span class="text-warning">Service</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#" data-page="home">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                            <li><a class="dropdown-item" href="#" data-page="category" data-category="electronics">Electronics</a></li>
-                            <li><a class="dropdown-item" href="#" data-page="category" data-category="fashion">Fashion</a></li>
-                            <li><a class="dropdown-item" href="#" data-page="category" data-category="home">Home & Garden</a></li>
-                            <li><a class="dropdown-item" href="#" data-page="category" data-category="beauty">Beauty</a></li>
-                            <li><a class="dropdown-item" href="#" data-page="category" data-category="sports">Sports</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" data-page="categories">All Categories</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-page="products">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-page="deals">Deals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-page="about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-page="contact">Contact</a>
-                    </li>
-                </ul>
+<!-- Top Bar -->
+<div class="top-bar bg-dark text-white py-2">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
                 <div class="d-flex align-items-center">
-                    <!-- Search Bar -->
-                    <div class="search-container me-3 d-none d-md-block">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
-                            <button class="btn btn-outline-primary" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </form>
+                    <i class="fas fa-phone-alt me-2"></i>
+                    <span class="me-3">+91 7234567890</span>
+                    <i class="fas fa-envelope me-2"></i>
+                    <span>monishnker@gmail.com</span>
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="social-links">
+                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="/">
+            <span class="text-primary">E-Commerce</span><span class="text-warning">Service</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="categories.html" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                        <li><a class="dropdown-item" href="categories.html#electronics">Electronics</a></li>
+                        <li><a class="dropdown-item" href="categories.html#fashion">Fashion</a></li>
+                        <li><a class="dropdown-item" href="categories.html#home-garden">Home & Garden</a></li>
+                        <li><a class="dropdown-item" href="categories.html#beauty">Beauty</a></li>
+                        <li><a class="dropdown-item" href="categories.html#sports">Sports</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="categories.html">All Categories</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="deals.html">Deals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <!-- Search Bar -->
+                <div class="search-container me-3 d-none d-md-block">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- User Actions -->
+                <div class="d-flex">
+                    <a href="#" class="nav-link me-3" data-bs-toggle="modal" data-bs-target="#wishlistModal">
+                        <i class="far fa-heart fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count">0</span>
+                    </a>
+
+                    <a href="#" class="nav-link me-3 position-relative" data-page="cart">
+                        <i class="fas fa-shopping-cart fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-count">0</span>
+                    </a>
+
+                    <div id="userSection" class="d-none d-md-block">
+                        <a href="#" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a>
                     </div>
-                    
-                    <!-- User Actions -->
-                    <div class="d-flex">
-                        <a href="#" class="nav-link me-3" data-bs-toggle="modal" data-bs-target="#wishlistModal">
-                            <i class="far fa-heart fs-5"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger wishlist-count">0</span>
+
+                    <div id="userProfile" class="dropdown d-none">
+                        <button class="btn btn-link text-dark text-decoration-none dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fs-4"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#" id="profileLink"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="#" data-page="orders"><i class="fas fa-box me-2"></i>My Orders</a></li>
+                            <li><a class="dropdown-item" href="#" data-page="wishlist"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" id="logoutLink"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Hero Section with Background and Product Showcase -->
+        <div id="mainContent" class="hero-section">
+            <!-- Background Elements -->
+            <img src="/images/e-comm.png" alt="E-commerce Background" class="hero-bg">
+            <div class="hero-pattern"></div>
+
+            <!-- Hero Content -->
+            <div class="hero-content container">
+                <!-- Text Content -->
+                <div class="hero-text">
+                    <h1 class="display-4 fw-bold mb-3">Welcome to <span class="text-warning">E-Commerce</span> Service</h1>
+                    <p class="lead mb-4">Discover amazing products at unbeatable prices with our exclusive collections</p>
+                    <div class="hero-buttons">
+                        <a href="#featured-products" class="btn btn-primary btn-lg px-4 me-3">
+                            <i class="fas fa-shopping-bag me-2"></i>Shop Now
                         </a>
-                        
-                        <a href="#" class="nav-link me-3 position-relative" data-page="cart">
-                            <i class="fas fa-shopping-cart fs-5"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-count">0</span>
+                        <a href="#categories" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-tags me-2"></i>Browse Categories
                         </a>
-                        
-                        <div id="userSection" class="d-none d-md-block">
-                            <a href="#" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
-                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign Up</a>
+                    </div>
+                    <div class="mt-4 d-flex align-items-center">
+                        <div class="d-flex me-4">
+                            <span class="me-2"><i class="fas fa-check-circle text-success"></i></span>
+                            <span>Free Shipping</span>
                         </div>
-                        
-                        <div id="userProfile" class="dropdown d-none">
-                            <button class="btn btn-link text-dark text-decoration-none dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle fs-4"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="#" id="profileLink"><i class="fas fa-user me-2"></i>My Profile</a></li>
-                                <li><a class="dropdown-item" href="#" data-page="orders"><i class="fas fa-box me-2"></i>My Orders</a></li>
-                                <li><a class="dropdown-item" href="#" data-page="wishlist"><i class="fas fa-heart me-2"></i>Wishlist</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#" id="logoutLink"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-                            </ul>
+                        <div class="d-flex me-4">
+                            <span class="me-2"><i class="fas fa-check-circle text-success"></i></span>
+                            <span>24/7 Support</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Product Showcase -->
+                <div class="hero-images">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                         alt="Wireless Headphones"
+                         class="hero-image hero-image-1">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                         alt="Smart Watch"
+                         class="hero-image hero-image-2">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                         alt="Running Shoes"
+                         class="hero-image hero-image-3">
+                </div>
             </div>
         </div>
-    </nav>
 
-    <div class="container mt-4">
-        <!-- Main Content Wrapper -->
-        <div class="main-wrapper">
-            <!-- Hero Section with Background and Product Showcase -->
-            <div id="mainContent" class="hero-section">
-                <!-- Background Elements -->
-                <img src="/images/e-comm.png" alt="E-commerce Background" class="hero-bg">
-                <div class="hero-pattern"></div>
-                
-                <!-- Hero Content -->
-                <div class="hero-content container">
-                    <!-- Text Content -->
-                    <div class="hero-text">
-                        <h1 class="display-4 fw-bold mb-3">Welcome to <span class="text-warning">E-Commerce</span> Service</h1>
-                        <p class="lead mb-4">Discover amazing products at unbeatable prices with our exclusive collections</p>
-                        <div class="hero-buttons">
-                            <a href="#featured-products" class="btn btn-primary btn-lg px-4 me-3">
-                                <i class="fas fa-shopping-bag me-2"></i>Shop Now
-                            </a>
-                            <a href="#categories" class="btn btn-outline-light btn-lg px-4">
-                                <i class="fas fa-tags me-2"></i>Browse Categories
-                            </a>
-                        </div>
-                        <div class="mt-4 d-flex align-items-center">
-                            <div class="d-flex me-4">
-                                <span class="me-2"><i class="fas fa-check-circle text-success"></i></span>
-                                <span>Free Shipping</span>
-                            </div>
-                            <div class="d-flex me-4">
-                                <span class="me-2"><i class="fas fa-check-circle text-success"></i></span>
-                                <span>24/7 Support</span>
+        <!-- Categories Section -->
+        <section class="py-5" id="categories">
+            <div class="container">
+                <div class="section-title text-center mb-5">
+                    <h2 class="fw-bold">Shop by Category</h2>
+                    <p class="text-muted">Browse our wide range of products</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="category-card position-relative overflow-hidden rounded-3">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                 alt="Electronics" class="img-fluid w-100">
+                            <div class="category-overlay">
+                                <h3>Electronics</h3>
+                                <a href="#" class="btn btn-outline-light">Shop Now</a>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Product Showcase -->
-                    <div class="hero-images">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Wireless Headphones" 
-                             class="hero-image hero-image-1">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Smart Watch" 
-                             class="hero-image hero-image-2">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                             alt="Running Shoes" 
-                             class="hero-image hero-image-3">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Loading Spinner -->
-            <div id="loadingSpinner" class="text-center my-5" style="display: none;">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p class="mt-2">Loading...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form id="loginForm">
-                    <div class="modal-body">
-                        <div id="loginAlert" class="alert alert-danger d-none"></div>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="loginEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Register Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form id="registerForm">
-                    <div class="modal-body">
-                        <div id="registerAlert" class="alert alert-danger d-none"></div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                    <div class="col-md-4">
+                        <div class="category-card position-relative overflow-hidden rounded-3">
+                            <img src="https://images.unsplash.com/photo-1445205170230-053b83016042?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                 alt="Fashion" class="img-fluid w-100">
+                            <div class="category-overlay">
+                                <h3>Fashion</h3>
+                                <a href="#" class="btn btn-outline-light">Shop Now</a>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="registerEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="registerEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="registerPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="registerPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="category-card position-relative overflow-hidden rounded-3">
+                            <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                 alt="Home & Garden" class="img-fluid w-100">
+                            <div class="category-overlay">
+                                <h3>Home & Garden</h3>
+                                <a href="#" class="btn btn-outline-light">Shop Now</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="py-5 bg-light" id="featured-products">
+            <div class="container">
+                <div class="section-title text-center mb-5">
+                    <h2 class="fw-bold">Featured Products</h2>
+                    <p class="text-muted">Discover our most popular items</p>
+                </div>
+                <div class="row g-4" id="featuredProducts">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="banner-section bg-primary text-white rounded-3 p-5 position-relative overflow-hidden">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-3">Summer Sale!</h2>
+                            <p class="mb-4">Up to 50% off on selected items. Limited time offer!</p>
+                            <a href="#" class="btn btn-light btn-lg">Shop Now</a>
+                        </div>
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <img src="https://images.unsplash.com/photo-1607082349566-187342183e63?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                 alt="Summer Sale" class="img-fluid rounded-3">
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="text-center my-5" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading...</p>
         </div>
     </div>
+</div>
 
-    <!-- Toast Notifications -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto" id="toastTitle">Notification</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="toast-body" id="toastMessage">
-                Operation completed successfully.
-            </div>
+            <form id="loginForm">
+                <div class="modal-body">
+                    <div id="loginAlert" class="alert alert-danger d-none"></div>
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script src="/js/app.js"></script>
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="registerForm">
+                <div class="modal-body">
+                    <div id="registerAlert" class="alert alert-danger d-none"></div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="registerEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="registerPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notifications -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto" id="toastTitle">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toastMessage">
+            Operation completed successfully.
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/app.js"></script>
 </body>
 </html>
 <html lang="en">
@@ -329,55 +403,55 @@
     </style>
 </head>
 <body>
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <h5>E-commerce</h5>
-                    <p>Your one-stop shop for all your needs. Quality products at competitive prices.</p>
-                    <div class="social-links">
-                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50 text-decoration-none" data-page="home">Home</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" data-page="products">Products</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" data-page="categories">Categories</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" data-page="deals">Deals</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" data-page="contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h5>Customer Service</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">FAQs</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Shipping Policy</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Return Policy</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h5>Contact Us</h5>
-                    <address class="text-white-50">
-                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 E-commerce St, City, Country</p>
-                        <p><i class="fas fa-phone me-2"></i> +91 7123456789</p>
-                        <p><i class="fas fa-envelope me-2"></i> monishanker@gmail.com</p>
-                    </address>
+<!-- Footer -->
+<footer class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <h5>E-commerce</h5>
+                <p>Your one-stop shop for all your needs. Quality products at competitive prices.</p>
+                <div class="social-links">
+                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <hr class="my-4">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2025  E-commerce. All rights reserved.</p>
+            <div class="col-lg-2 col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50 text-decoration-none" data-page="home">Home</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none" data-page="products">Products</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none" data-page="categories">Categories</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none" data-page="deals">Deals</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none" data-page="contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <h5>Customer Service</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50 text-decoration-none">About Us</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none">FAQs</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none">Shipping Policy</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none">Return Policy</a></li>
+                    <li><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <h5>Contact Us</h5>
+                <address class="text-white-50">
+                    <p><i class="fas fa-map-marker-alt me-2"></i> 123 E-commerce St, City, Country</p>
+                    <p><i class="fas fa-phone me-2"></i> +91 7123456789</p>
+                    <p><i class="fas fa-envelope me-2"></i> monishanker@gmail.com</p>
+                </address>
             </div>
         </div>
-    </footer>
+        <hr class="my-4">
+        <div class="text-center">
+            <p class="mb-0">&copy; 2025  E-commerce. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
 <script>
     // Display current time

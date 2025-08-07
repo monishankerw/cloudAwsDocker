@@ -115,34 +115,144 @@ $(document).ready(function() {
 });
 
 // Sample product data
-const sampleProducts = [
+const products = [
     {
         id: 1,
         name: 'Wireless Headphones',
         price: 99.99,
-        oldPrice: 129.99,
+        originalPrice: 149.99,
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
         category: 'Electronics',
-        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
         rating: 4.5,
         reviews: 128,
-        inStock: true,
         isNew: true,
-        description: 'High-quality wireless headphones with noise cancellation.'
+        isOnSale: true,
+        stock: 15
     },
     {
         id: 2,
-        name: 'Smart Watch',
+        name: 'Smart Watch Pro',
         price: 199.99,
-        oldPrice: 249.99,
+        originalPrice: 249.99,
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
         category: 'Electronics',
-        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-        rating: 4.7,
-        reviews: 245,
-        inStock: true,
+        rating: 4.8,
+        reviews: 256,
         isNew: true,
-        description: 'Feature-rich smartwatch with health monitoring.'
+        isOnSale: false,
+        stock: 8
+    },
+    {
+        id: 3,
+        name: 'Running Shoes',
+        price: 89.99,
+        originalPrice: 129.99,
+        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+        category: 'Fashion',
+        rating: 4.7,
+        reviews: 342,
+        isNew: false,
+        isOnSale: true,
+        stock: 0
+    },
+    {
+        id: 4,
+        name: 'Bluetooth Speaker',
+        price: 79.99,
+        originalPrice: 99.99,
+        image: 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+        category: 'Electronics',
+        rating: 4.3,
+        reviews: 87,
+        isNew: true,
+        isOnSale: false,
+        stock: 12
+    },
+    {
+        id: 5,
+        name: 'Designer Handbag',
+        price: 149.99,
+        originalPrice: 199.99,
+        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+        category: 'Fashion',
+        rating: 4.6,
+        reviews: 214,
+        isNew: false,
+        isOnSale: true,
+        stock: 5
+    },
+    {
+        id: 6,
+        name: 'Smartphone X',
+        price: 699.99,
+        originalPrice: 799.99,
+        image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+        category: 'Electronics',
+        rating: 4.9,
+        reviews: 512,
+        isNew: true,
+        isOnSale: false,
+        stock: 20
     }
 ];
+
+// Function to render products
+function renderProducts(products) {
+    const productsContainer = document.getElementById('featuredProducts');
+    if (!productsContainer) return;
+    
+    productsContainer.innerHTML = products.map(product => `
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card product-card h-100">
+                <div class="position-relative">
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                    ${product.isNew ? '<span class="badge bg-primary position-absolute top-0 start-0 m-2">New</span>' : ''}
+                    ${product.isOnSale ? '<span class="badge bg-danger position-absolute top-0 end-0 m-2">Sale</span>' : ''}
+                    ${product.stock === 0 ? '<div class="sold-out-overlay"><span>Sold Out</span></div>' : ''}
+                    <div class="product-actions">
+                        <button class="btn btn-sm btn-light rounded-circle me-2" title="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary rounded-circle me-2" title="Quick View">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-success rounded-circle" title="Add to Cart" ${product.stock === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="text-muted small">${product.category}</span>
+                        <div class="rating">
+                            ${Array(5).fill('').map((_, i) => 
+                                `<i class="fas fa-star${i < Math.floor(product.rating) ? ' text-warning' : '-o'}"></i>`
+                            ).join('')}
+                            <small class="ms-1">(${product.reviews})</small>
+                        </div>
+                    </div>
+                    <h5 class="card-title mb-1">${product.name}</h5>
+                    <div class="d-flex align-items-center">
+                        <span class="h5 mb-0 text-primary">$${product.price.toFixed(2)}</span>
+                        ${product.originalPrice > product.price ? 
+                            `<small class="text-muted text-decoration-line-through ms-2">$${product.originalPrice.toFixed(2)}</small>` : ''}
+                    </div>
+                    <div class="mt-2">
+                        ${product.stock > 0 ? 
+                            `<span class="text-success small"><i class="fas fa-check-circle"></i> In Stock (${product.stock})</span>` :
+                            '<span class="text-danger small"><i class="fas fa-times-circle"></i> Out of Stock</span>'
+                        }
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <button class="btn btn-outline-primary w-100" ${product.stock === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
 // Load cart and wishlist from localStorage
 function loadData() {
@@ -236,8 +346,8 @@ function renderProductCard(product) {
 
 // Add to cart function
 function addToCart(productId, quantity = 1) {
-    const product = sampleProducts.find(p => p.id === productId);
-    if (!product || !product.inStock) return;
+    const product = products.find(p => p.id === productId);
+    if (!product || !product.stock) return;
     
     const existingItem = cart.find(item => item.id === productId);
     
@@ -259,7 +369,7 @@ function addToCart(productId, quantity = 1) {
 
 // Toggle wishlist
 function toggleWishlist(productId) {
-    const product = sampleProducts.find(p => p.id === productId);
+    const product = products.find(p => p.id === productId);
     if (!product) return;
     
     const existingIndex = wishlist.findIndex(item => item.id === productId);
@@ -291,7 +401,7 @@ function initializeApp() {
 function renderHomePage() {
     const $featuredProducts = $('#featuredProducts');
     if ($featuredProducts.length) {
-        const featuredHtml = sampleProducts.map(renderProductCard).join('');
+        const featuredHtml = products.map(renderProductCard).join('');
         $featuredProducts.html(featuredHtml);
     }
 }
@@ -327,23 +437,43 @@ function setupEventListeners() {
 
 // Document ready
 $(document).ready(function() {
+    renderProducts(products);
     initializeApp();
     setupEventListeners();
     checkAuthStatus();
 });
 
 // Initialize application
-function initializeApp() {
+function init() {
+    // Render featured products
+    renderProducts(products);
+    
+    // Add event listeners
+    document.addEventListener('click', function(e) {
+        // Add to cart button click
+        if (e.target.closest('.btn-success')) {
+            const productCard = e.target.closest('.product-card');
+            const productId = productCard ? parseInt(productCard.dataset.id) : null;
+            if (productId) {
+                addToCart(productId);
+            }
+        }
+        
+        // Wishlist button click
+        if (e.target.closest('.btn-light')) {
+            const productCard = e.target.closest('.product-card');
+            const productId = productCard ? parseInt(productCard.dataset.id) : null;
+            if (productId) {
+                toggleWishlist(productId);
+            }
+        }
+    });
+    
     // Initialize tooltips
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
-
-    // Initialize toast
-    const toastElList = [].slice.call(document.querySelectorAll('.toast'));
-    const toastList = toastElList.map(function(toastEl) {
-        return new bootstrap.Toast(toastEl, { autohide: true, delay: 5000 });
     });
 }
 

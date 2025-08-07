@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals & Offers - E-Commerce Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="/">
+                <span class="text-primary">E-Commerce</span><span class="text-warning">Service</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="deals.html">Deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i> Login
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-user-plus me-1"></i> Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Deals Page Content -->
+    <div class="container my-5">
+        <!-- Flash Sale Banner -->
+        <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+            <div class="me-3">
+                <i class="fas fa-bolt fa-2x"></i>
+            </div>
+            <div>
+                <h4 class="alert-heading mb-1">Flash Sale!</h4>
+                <p class="mb-0">Hurry up! Limited time offers ending in <span id="countdown" class="fw-bold">23:59:59</span></p>
+            </div>
+        </div>
+
+        <!-- Daily Deals -->
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Today's Deals</h2>
+                <a href="#" class="btn btn-outline-primary">View All Deals</a>
+            </div>
+            <div class="row g-4" id="dailyDeals">
+                <!-- Daily deals will be loaded here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Special Offers -->
+        <div class="mb-5">
+            <h2 class="mb-4">Special Offers</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Special Offer">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-danger p-2">50% OFF</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Electronics Mega Sale</h5>
+                            <p class="card-text text-muted">Up to 50% off on selected electronics. Limited time offer!</p>
+                            <a href="#" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1445205170230-053b83016042?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Special Offer">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-success p-2">BUY 1 GET 1</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Fashion Bonanza</h5>
+                            <p class="card-text text-muted">Buy 1 Get 1 Free on selected fashion items. Limited stock!</p>
+                            <a href="#" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Special Offer">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-warning text-dark p-2">FREE SHIPPING</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Home & Living</h5>
+                            <p class="card-text text-muted">Free shipping on all home & garden products over $50.</p>
+                            <a href="#" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coupon Codes -->
+        <div class="mb-5">
+            <h2 class="mb-4">Available Coupons</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">SUMMER25</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Get 25% off on your first purchase. Maximum discount $50.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Valid until: 31/12/2025</small>
+                                <button class="btn btn-sm btn-outline-primary" onclick="copyCoupon('SUMMER25')">Copy Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">FREESHIP</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Free shipping on all orders over $30. No minimum purchase required.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Valid until: 31/12/2025</small>
+                                <button class="btn btn-sm btn-outline-success" onclick="copyCoupon('FREESHIP')">Copy Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-warning">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">WELCOME10</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">10% off on your first order. No minimum purchase required.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">For new customers only</small>
+                                <button class="btn btn-sm btn-outline-warning text-dark" onclick="copyCoupon('WELCOME10')">Copy Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Us</h5>
+                    <p class="text-white-50">Your one-stop shop for all your needs. We provide the best products at the best prices.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Home</a></li>
+                        <li><a href="#" class="text-white-50">Products</a></li>
+                        <li><a href="#" class="text-white-50">About Us</a></li>
+                        <li><a href="#" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <address class="text-white-50">
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 E-commerce St, City, Country</p>
+                        <p><i class="fas fa-phone me-2"></i> +91 7123456789</p>
+                        <p><i class="fas fa-envelope me-2"></i> monishanker@gmail.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 E-Commerce Service. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 0);
+            
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Copy coupon code
+        function copyCoupon(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert(`Coupon code "${code}" copied to clipboard!`);
+            });
+        }
+        
+        // Load daily deals
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would be replaced with an API call in a real application
+            const dailyDeals = products.filter(product => product.isOnSale).slice(0, 4);
+            renderProducts(dailyDeals, 'dailyDeals');
+        });
+    </script>
+</body>
+</html>

@@ -177,6 +177,164 @@ body {
     z-index: 4;
 }
 
+/* Categories Section */
+.section-title h2 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.category-card {
+    border-radius: var(--rounded-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: var(--shadow);
+}
+
+.category-card img {
+    transition: transform 0.5s ease;
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.category-card:hover img {
+    transform: scale(1.05);
+}
+
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+.category-card:hover .category-overlay {
+    opacity: 1;
+}
+
+.category-overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.category-overlay .btn {
+    transform: translateY(30px);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    opacity: 0;
+}
+
+.category-card:hover .category-overlay h3,
+.category-card:hover .category-overlay .btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Banner Section */
+.banner-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    box-shadow: var(--shadow-lg);
+}
+
+.banner-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.banner-section img {
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+
+.banner-section:hover img {
+    transform: translateY(-5px);
+}
+
+/* Featured Products */
+#featured-products {
+    background-color: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+}
+
+#featured-products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, #f8f9fa, #fff);
+    z-index: 0;
+}
+
+#featured-products .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .category-card {
+        margin-bottom: 20px;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .banner-section {
+        text-align: center;
+    }
+    
+    .banner-section img {
+        margin-top: 20px;
+    }
+}
+
 .hero-content h2 {
     font-size: 3rem;
     font-weight: 700;
