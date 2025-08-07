@@ -24,7 +24,7 @@ public class UserController {
     public ApiResponse<UserResponse> createUser(
             @Valid @RequestBody UserRequest userRequest,
             WebRequest request) {
-        UserResponse response = userService.createUser(userRequest);
+        UserResponse response = userService.registerUser(userRequest);
         return ApiResponse.created(response);
     }
 

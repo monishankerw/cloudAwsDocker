@@ -29,10 +29,23 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
     
+    @Column(nullable = false, unique = true)
+    private String mobile;
+    
     @Enumerated(EnumType.STRING)
     private UserRole role;
     
-    private boolean active = true;
+    private boolean active = false; // Set to false until email is verified
+    
+    private boolean emailVerified = false;
+    
+    private boolean mobileVerified = false;
+    
+    private String emailVerificationOtp;
+    
+    private String mobileVerificationOtp;
+    
+    private LocalDateTime otpExpiryTime;
     
     @CreationTimestamp
     @Column(updatable = false)
