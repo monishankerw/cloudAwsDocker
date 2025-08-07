@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ApiResponse<UserResponse> createUser(
             @Valid @RequestBody UserRequest userRequest,
             WebRequest request) {
