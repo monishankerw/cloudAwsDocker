@@ -70,6 +70,42 @@ docker-compose down -v
 
 ## API Endpoints
 
+### Authentication and OTP
+
+- `POST /api/v1/auth/register` - Register a new user with email and mobile
+  ```json
+  {
+    "username": "johndoe",
+    "email": "user@example.com",
+    "mobile": "9876543210",
+    "password": "Password@123"
+  }
+  ```
+
+- `POST /api/v1/auth/verify-email` - Verify email with OTP
+  ```json
+  {
+    "email": "user@example.com",
+    "otp": "123456"
+  }
+  ```
+
+- `POST /api/v1/auth/verify-mobile` - Verify mobile with OTP
+  ```json
+  {
+    "mobile": "9876543210",
+    "otp": "123456"
+  }
+  ```
+
+- `POST /api/v1/auth/resend-otp` - Resend OTP
+  ```json
+  {
+    "email": "user@example.com",  // or "mobile": "9876543210"
+    "isEmailVerification": true   // or false for mobile verification
+  }
+  ```
+
 ### Authentication
 
 - `POST /api/v1/auth/login` - User login
@@ -80,7 +116,7 @@ docker-compose down -v
   }
   ```
 
-### User Management
+### User Management (Protected Endpoints)
 
 - `POST /api/v1/users` - Register a new user
   ```json
@@ -96,6 +132,65 @@ docker-compose down -v
 - `GET /api/v1/users/{id}` - Get user by ID (requires ADMIN role or own profile)
 - `PUT /api/v1/users/{id}` - Update user (requires ADMIN role or own profile)
 - `DELETE /api/v1/users/{id}` - Delete user (requires ADMIN role)
+
+## Email and SMS Configuration
+
+### Email Setup
+
+1. **Gmail SMTP Setup**:
+   - Go to your Google Account settings
+   - Navigate to "Security" > "App passwords"
+   - Generate an app password for your application
+   - Use this password in the `EMAIL_PASSWORD` environment variable
+
+2. **Environment Variables**:
+   ```
+   # Email Configuration
+   spring.mail.username=your-email@gmail.com
+   spring.mail.password=your-app-specific-password
+   
+   # AWS Configuration (for SMS)
+   AWS_ACCESS_KEY_ID=your-aws-access-key
+   AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+   AWS_REGION=ap-south-1
+   ```
+
+### SMS Setup (AWS SNS)
+
+1. **AWS Setup**:
+   - Create an AWS account if you don't have one
+   - Create an IAM user with `AmazonSNSFullAccess` policy
+   - Generate access keys for the IAM user
+   - Set the AWS credentials in your environment variables
+
+2. **Test Mode**:
+   - You can enable test mode to log OTPs instead of sending them:
+     ```yaml
+     app:
+       otp:
+         test-mode: true  # Set to false to send real emails/SMS
+     ```
+
+### Testing Email and SMS
+
+1. **Test Endpoints**:
+   - Send test email: `POST /api/v1/test/send-email?email=your@email.com`
+   - Send test SMS: `POST /api/v1/test/send-sms?phoneNumber=+1234567890`
+   - Test full OTP flow: `POST /api/v1/test/send-otp?email=your@email.com&phoneNumber=+1234567890`
+
+2. **Using cURL**:
+   ```bash
+   # Test email
+   curl -X POST "http://localhost:8083/api/v1/test/send-email?email=your@email.com"
+   
+   # Test SMS
+   curl -X POST "http://localhost:8083/api/v1/test/send-sms?phoneNumber=+1234567890"
+   ```
+
+3. **Testing in Browser**:
+   - Open Swagger UI at `http://localhost:8083/swagger-ui.html`
+   - Find the test endpoints under the `test-controller` section
+   - Use the "Try it out" button to test the endpoints
 
 ## Environment Variables
 

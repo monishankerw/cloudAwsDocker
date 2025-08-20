@@ -27,28 +27,28 @@
 </head>
 <body>
 <!-- Top Bar -->
-<div class="top-bar bg-dark text-white py-2">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-phone-alt me-2"></i>
-                    <span class="me-3">+91 7234567890</span>
-                    <i class="fas fa-envelope me-2"></i>
-                    <span>monishnker@gmail.com</span>
-                </div>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <div class="social-links">
-                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="top-bar bg-dark text-white py-2">-->
+<!--    <div class="container">-->
+<!--        <div class="row align-items-center">-->
+<!--            <div class="col-md-6">-->
+<!--                <div class="d-flex align-items-center">-->
+<!--                    <i class="fas fa-phone-alt me-2"></i>-->
+<!--                    <span class="me-3">+91 7234567890</span>-->
+<!--                    <i class="fas fa-envelope me-2"></i>-->
+<!--                    <span>monishnker@gmail.com</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 text-md-end">-->
+<!--                <div class="social-links">-->
+<!--                    <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>-->
+<!--                    <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>-->
+<!--                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>-->
+<!--                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- Main Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
@@ -311,32 +311,66 @@
             <form id="registerForm">
                 <div class="modal-body">
                     <div id="registerAlert" class="alert alert-danger d-none"></div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" required>
-                        </div>
-                    </div>
+                    
                     <div class="mb-3">
-                        <label for="registerEmail" class="form-label">Email address</label>
+                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="username" required>
+                        <div class="form-text">This will be your unique identifier</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email address <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="registerEmail" required>
+                        <div class="form-text">We'll send a verification code to this email</div>
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="registerPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="registerPassword" required>
+                        <label for="registerMobile" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">+91</span>
+                            <input type="tel" class="form-control" id="registerMobile" 
+                                   pattern="[0-9]{10}" 
+                                   placeholder="Enter 10-digit mobile number" 
+                                   required>
+                        </div>
+                        <div class="form-text">We'll send an SMS with verification code</div>
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <label for="registerPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="registerPassword" 
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                               title="Must contain at least 8 characters, one uppercase, one lowercase, one number and one special character"
+                               required>
+                        <div class="form-text">
+                            Password must be at least 8 characters and include:
+                            <ul class="mb-0 ps-3">
+                                <li>One uppercase letter</li>
+                                <li>One lowercase letter</li>
+                                <li>One number</li>
+                                <li>One special character (@$!%*?&)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                    
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                        <label class="form-check-label" for="termsCheck">
+                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                        </label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Create Account
+                    </button>
                 </div>
             </form>
         </div>
@@ -352,6 +386,62 @@
         </div>
         <div class="toast-body" id="toastMessage">
             Operation completed successfully.
+        </div>
+    </div>
+</div>
+
+<!-- OTP Verification Modal -->
+<div class="modal fade" id="otpVerificationModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Verify Your Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="otpAlert" class="alert d-none"></div>
+                <p>We've sent verification codes to your email and mobile number.</p>
+                
+                <div class="mb-4">
+                    <h6 class="mb-3"><i class="fas fa-envelope me-2"></i> Email Verification</h6>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control form-control-lg text-center" id="emailOtp" 
+                               placeholder="Enter 6-digit code" maxlength="6" pattern="\d{6}" required>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Check your email for the verification code</small>
+                        <button type="button" class="btn btn-link btn-sm p-0" id="resendEmailOtp">
+                            <i class="fas fa-redo me-1"></i> Resend Code
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <h6 class="mb-3"><i class="fas fa-mobile-alt me-2"></i> Mobile Verification</h6>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control form-control-lg text-center" id="mobileOtp" 
+                               placeholder="Enter 6-digit code" maxlength="6" pattern="\d{6}" required>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Check your phone for the SMS code</small>
+                        <button type="button" class="btn btn-link btn-sm p-0" id="resendMobileOtp">
+                            <i class="fas fa-redo me-1"></i> Resend Code
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Please complete both verifications to activate your account.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">I'll verify later</button>
+                <button type="button" class="btn btn-primary" id="verifyOtpBtn">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    Verify & Continue
+                </button>
+            </div>
         </div>
     </div>
 </div>

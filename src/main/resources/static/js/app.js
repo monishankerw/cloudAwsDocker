@@ -557,57 +557,199 @@ function handleLogin() {
             $('#loginModal').modal('hide');
             showToast('Success', 'Logged in successfully!', 'success');
             loadPage('dashboard');
-        },
-        error: function(xhr) {
-            const error = xhr.responseJSON?.message || 'Login failed. Please try again.';
-            showAlert($alert, error);
-        },
-        complete: function() {
-            showLoading(false);
-        }
-    });
-}
-
-// Handle user registration
 function handleRegistration() {
-    const firstName = $('#firstName').val();
-    const lastName = $('#lastName').val();
-    const email = $('#registerEmail').val();
-    const password = $('#registerPassword').val();
-    const confirmPassword = $('#confirmPassword').val();
+    const $form = $('#registerForm');
     const $alert = $('#registerAlert');
-
-    // Client-side validation
-    if (password !== confirmPassword) {
-        showAlert($alert, 'Passwords do not match.');
-        return;
-    }
-
-    showLoading(true);
-
-    $.ajax({
-        url: `${API_BASE_URL}/auth/register`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            firstName,
-            lastName,
-            email,
-            password
-        }),
-        success: function(response) {
-            $('#registerModal').modal('hide');
-            showToast('Success', 'Registration successful! Please login.', 'success');
-            // Auto-open login modal
-            setTimeout(() => $('#loginModal').modal('show'), 500);
-        },
-        error: function(xhr) {
-            const error = xhr.responseJSON?.message || 'Registration failed. Please try again.';
-            showAlert($alert, error);
-        },
-        complete: function() {
-            showLoading(false);
+    let registrationData = null;
+    
+    // Function to show OTP verification modal
+    function showOtpVerificationModal(email, mobile) {
+        const modalHtml = `
+            <div class="modal fade" id="otpVerificationModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Verify Your Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="otpAlert" class="alert d-none"></div>
+                            <p>We've sent verification codes to your email and mobile number.</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Email Verification Code</label>
+                                <input type="text" class="form-control" id="emailOtp" placeholder="Enter 6-digit code" maxlength="6" pattern="\d{6}" required>
+                                <div class="form-text">Check your email for the verification code</div>
+                                <button type="button" class="btn btn-link btn-sm p-0 mt-1" id="resendEmailOtp">Resend Email OTP</button>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Mobile Verification Code</label>
+                                <input type="text" class="form-control" id="mobileOtp" placeholder="Enter 6-digit code" maxlength="6" pattern="\d{6}" required>
+                                <div class="form-text">Check your mobile for the verification code</div>
+                                <button type="button" class="btn btn-link btn-sm p-0 mt-1" id="resendMobileOtp">Resend SMS OTP</button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="verifyOtpBtn">Verify & Complete Registration</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Remove existing modal if any
+        $('#otpVerificationModal').remove();
+        $('body').append(modalHtml);
+        
+        const $otpModal = $('#otpVerificationModal');
+        const $verifyBtn = $('#verifyOtpBtn');
+        const $otpAlert = $('#otpAlert');
+        
+        // Handle OTP verification
+        $verifyBtn.off('click').on('click', function() {
+            const emailOtp = $('#emailOtp').val();
+            const mobileOtp = $('#mobileOtp').val();
+            
+            if (!emailOtp || !mobileOtp) {
+                showOtpAlert('Please enter both verification codes', 'danger');
+                return;
+            }
+            
+            // Verify email first
+            verifyOtp(registrationData.email, emailOtp, true)
+                .then(() => {
+                    // Then verify mobile
+                    return verifyOtp(registrationData.mobile, mobileOtp, false);
+                })
+                .then(() => {
+                    showOtpAlert('Verification successful! Your account is now active.', 'success');
+                    setTimeout(() => {
+                        $otpModal.modal('hide');
+                        showToast('Success', 'Registration completed successfully! You can now log in.', 'success');
+                    }, 1500);
+                })
+                .catch(error => {
+                    showOtpAlert(error, 'danger');
+                });
+        });
+        
+        // Handle resend email OTP
+        $('#resendEmailOtp').off('click').on('click', function() {
+            resendOtp(registrationData.email, true);
+        });
+        
+        // Handle resend mobile OTP
+        $('#resendMobileOtp').off('click').on('click', function() {
+            resendOtp(registrationData.mobile, false);
+        });
+        
+        // Show the modal
+        $otpModal.modal('show');
+        
+        // Function to show alert in OTP modal
+        function showOtpAlert(message, type) {
+            $otpAlert.removeClass('d-none alert-danger alert-success')
+                     .addClass(`alert-${type}`)
+                     .text(message);
         }
+    }
+    
+    // Function to verify OTP
+    function verifyOtp(identifier, otp, isEmail) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `${API_BASE_URL}/users/verify/${isEmail ? 'email' : 'mobile'}`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    emailOrMobile: identifier,
+                    otp: otp
+                }),
+                success: function(response) {
+                    resolve(response);
+                },
+                error: function(xhr) {
+                    const error = xhr.responseJSON?.message || 'Verification failed. Please try again.';
+                    reject(error);
+                }
+            });
+        });
+    }
+    
+    // Function to resend OTP
+    function resendOtp(identifier, isEmail) {
+        $.ajax({
+            url: `${API_BASE_URL}/users/resend/${isEmail ? 'email' : 'mobile'}-verification/${encodeURIComponent(identifier)}`,
+            type: 'POST',
+            success: function(response) {
+                showToast('Success', `Verification code has been resent to your ${isEmail ? 'email' : 'mobile'}`, 'success');
+            },
+            error: function(xhr) {
+                const error = xhr.responseJSON?.message || 'Failed to resend verification code. Please try again.';
+                showOtpAlert(error, 'danger');
+            }
+        });
+    }
+    
+    // Handle registration form submission
+    $form.on('submit', function(e) {
+        e.preventDefault();
+        
+        registrationData = {
+            username: $('#username').val(),
+            email: $('#registerEmail').val(),
+            mobile: $('#registerMobile').val(),
+            password: $('#registerPassword').val(),
+            confirmPassword: $('#confirmPassword').val()
+        };
+        
+        // Basic validation
+        if (registrationData.password !== registrationData.confirmPassword) {
+            showAlert($alert, 'Passwords do not match');
+            return;
+        }
+        
+        if (!/^\+?[1-9]\d{9,14}$/.test(registrationData.mobile)) {
+            showAlert($alert, 'Please enter a valid mobile number with country code');
+            return;
+        }
+        
+        // Show loading state
+        const $submitBtn = $form.find('button[type="submit"]');
+        const originalBtnText = $submitBtn.html();
+        $submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...');
+        
+        // Call registration API
+        $.ajax({
+            url: `${API_BASE_URL}/users/register`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                username: registrationData.username,
+                email: registrationData.email,
+                mobile: registrationData.mobile,
+                password: registrationData.password
+            }),
+            success: function(response) {
+                // Hide the registration modal
+                $form[0].reset();
+                $('#registerModal').modal('hide');
+                
+                // Show OTP verification modal
+                showOtpVerificationModal(registrationData.email, registrationData.mobile);
+                
+                showToast('Success', 'Registration successful! Please verify your email and mobile number.', 'success');
+            },
+            error: function(xhr) {
+                const error = xhr.responseJSON?.message || 'Registration failed. Please try again.';
+                showAlert($alert, error);
+            },
+            complete: function() {
+                $submitBtn.prop('disabled', false).html(originalBtnText);
+            }
+        });
     });
 }
 

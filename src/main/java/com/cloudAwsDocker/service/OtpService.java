@@ -3,6 +3,8 @@ package com.cloudAwsDocker.service;
 import com.cloudAwsDocker.entity.User;
 import com.cloudAwsDocker.exception.OtpException;
 import com.cloudAwsDocker.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,40 +13,70 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@Slf4j
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+
 @Service
 public class OtpService {
     private static final int OTP_LENGTH = 6;
     private static final long OTP_EXIRATION_MINUTES = 15;
     
-    @Value("${app.otp.test-mode:false}")
+        @Value("${app.otp.test-mode:false}")
     private boolean testMode;
     
-    private final UserRepository userRepository;
+    @Value("${app.otp.length:6}")
+    private int otpLength;
     
-    public OtpService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Value("${app.otp.expiration-minutes:15}")
+    private int otpExpirationMinutes;
+    
+    private final UserRepository userRepository;
+    private final EmailService emailService;
+    private final SmsService smsService;
+    private final SecureRandom random = new SecureRandom();
     
     @Transactional
     public String generateAndSendOtp(User user, boolean isEmailVerification) {
         String otp = generateOtp();
-        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(OTP_EXIRATION_MINUTES);
+        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(otpExpirationMinutes);
         
         if (isEmailVerification) {
             user.setEmailVerificationOtp(otp);
+            user.setOtpExpiryTime(expiryTime);
+            userRepository.save(user);
+            
+            if (testMode) {
+                log.info("Test mode: Email OTP for {} is {}", user.getEmail(), otp);
+                return otp;
+            }
+            
+            try {
+                emailService.sendOtpEmail(user.getEmail(), otp);
+                log.info("Email OTP sent to {}", user.getEmail());
+            } catch (Exception e) {
+                log.error("Failed to send email OTP to {}: {}", user.getEmail(), e.getMessage(), e);
+                throw new OtpException("Failed to send OTP. Please try again later.");
+            }
         } else {
             user.setMobileVerificationOtp(otp);
+            user.setOtpExpiryTime(expiryTime);
+            userRepository.save(user);
+            
+            if (testMode) {
+                log.info("Test mode: Mobile OTP for {} is {}", user.getMobile(), otp);
+                return otp;
+            }
+            
+            try {
+                smsService.sendOtpSms(user.getMobile(), otp);
+                log.info("SMS OTP sent to {}", user.getMobile());
+            } catch (Exception e) {
+                log.error("Failed to send SMS OTP to {}: {}", user.getMobile(), e.getMessage(), e);
+                throw new OtpException("Failed to send OTP. Please try again later.");
+            }
         }
-        user.setOtpExpiryTime(expiryTime);
-        userRepository.save(user);
         
-        // In a real application, you would send the OTP via email/SMS here
-        // For now, we'll just log it or return it directly in test mode
-        if (testMode) {
-            return otp;
-        }
-        
-        // TODO: Implement actual email/SMS sending
         return null;
     }
     
@@ -98,9 +130,10 @@ public class OtpService {
     }
     
     private String generateOtp() {
-        // Generate a 6-digit OTP
-        SecureRandom random = new SecureRandom();
-        int num = 100000 + random.nextInt(900000);
-        return String.valueOf(num);
+        StringBuilder otp = new StringBuilder();
+        for (int i = 0; i < otpLength; i++) {
+            otp.append(random.nextInt(10));
+        }
+        return otp.toString();
     }
 }

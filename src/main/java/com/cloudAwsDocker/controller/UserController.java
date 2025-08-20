@@ -1,6 +1,7 @@
 package com.cloudAwsDocker.controller;
 
 import com.cloudAwsDocker.dto.ApiResponse;
+import com.cloudAwsDocker.dto.OtpVerificationRequest;
 import com.cloudAwsDocker.dto.UserRequest;
 import com.cloudAwsDocker.dto.UserResponse;
 import com.cloudAwsDocker.service.UserService;
@@ -58,5 +59,29 @@ public class UserController {
     public ApiResponse<UserResponse> getUserByUsername(@PathVariable String username) {
         UserResponse response = userService.getUserByUsername(username);
         return ApiResponse.success(response);
+    }
+    
+    @PostMapping("/verify/email")
+    public ApiResponse<Boolean> verifyEmailOtp(@Valid @RequestBody OtpVerificationRequest request) {
+        boolean verified = userService.verifyEmailOtp(request);
+        return ApiResponse.success(verified, "Email verified successfully");
+    }
+    
+    @PostMapping("/verify/mobile")
+    public ApiResponse<Boolean> verifyMobileOtp(@Valid @RequestBody OtpVerificationRequest request) {
+        boolean verified = userService.verifyMobileOtp(request);
+        return ApiResponse.success(verified, "Mobile number verified successfully");
+    }
+    
+    @PostMapping("/resend/email")
+    public ApiResponse<String> resendEmailVerification(@RequestParam String email) {
+        String otp = userService.resendEmailVerification(email);
+        return ApiResponse.success(otp, "Verification email resent successfully");
+    }
+    
+    @PostMapping("/resend/mobile")
+    public ApiResponse<String> resendMobileVerification(@RequestParam String mobile) {
+        String otp = userService.resendMobileVerification(mobile);
+        return ApiResponse.success(otp, "Verification SMS resent successfully");
     }
 }
